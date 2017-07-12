@@ -33,6 +33,12 @@ func Spider() {
 	// Have Verification code
 	haveVerifyCode := vsc.HaveVerifyCode(chatUrl)
 	if haveVerifyCode {
+		ch := make(chan int, 1)
+
+		url := "http://localhost:2222"
+		notice.Send(SOURCE+" : have a verify code, please open url and submit the verify code. "+url, ch)
+
+		<-ch
 		// start web server, wait to input and submit
 		vsc.StartWebServer()
 	}
