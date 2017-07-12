@@ -1,6 +1,7 @@
 package lengtoo
 
 import (
+	"github.com/gladmo/notice"
 	vsc "github.com/gladmo/verifyCodeServer"
 	"github.com/gladmo/wechat/chat"
 	"github.com/gladmo/wechat/image"
@@ -217,6 +218,7 @@ func crawlOne(title, url string, c_id int64) {
 
 	print("image joke length: ", len(jokeImg), "\n")
 
+	ch := make(chan int, len(jokeText))
 	// insert text joke list to db
 	for _, v := range jokeText {
 		textJoke := &models.Text_joke{
@@ -226,6 +228,13 @@ func crawlOne(title, url string, c_id int64) {
 			Content:   v,
 		}
 		textJoke.Save()
+
+		// notice to phone
+		go notice.Send(v, ch)
+	}
+
+	for i := 0; i < len(jokeText); i++ {
+		<-ch
 	}
 
 	// insert image list to db
