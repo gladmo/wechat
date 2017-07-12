@@ -1,6 +1,7 @@
 package lengtoo
 
 import (
+	vsc "github.com/gladmo/verifyCodeServer"
 	"github.com/gladmo/wechat/chat"
 	"github.com/gladmo/wechat/image"
 	"github.com/gladmo/wechat/models"
@@ -27,6 +28,13 @@ func Spider() {
 	// find chat by name(lengtoo)
 	chatUrl := chat.FindChatUrl("冷兔")
 	println("Get chat home url: " + chatUrl)
+
+	// Have Verification code
+	haveVerifyCode := vsc.HaveVerifyCode(chatUrl)
+	if haveVerifyCode {
+		// start web server, wait to input and submit
+		vsc.StartWebServer()
+	}
 
 	// get article url list by chat url
 	list := chat.GetArticleList(chatUrl)

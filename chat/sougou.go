@@ -5,9 +5,6 @@ import (
 	"net/http"
 	"regexp"
 
-	"fmt"
-	"io/ioutil"
-
 	xmlpath "gopkg.in/xmlpath.v2"
 )
 
@@ -97,12 +94,7 @@ func GetArticleList(url string) (result ArticleList) {
 	res, err := client.Do(req)
 	defer res.Body.Close()
 
-	str, _ := ioutil.ReadAll(res.Body)
-	fmt.Println(string(str))
 	node, _ := xmlpath.ParseHTML(res.Body)
-	// Have Verification code
-	verifyPath := xmlpath.MustCompile("path")
-	fmt.Println(verifyPath)
 
 	// match msgList from js
 	re := regexp.MustCompile(`var msgList = (\{.*\})`)
