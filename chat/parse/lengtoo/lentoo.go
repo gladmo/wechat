@@ -8,9 +8,11 @@ import (
 	"github.com/gladmo/wechat/models"
 	xmlpath "gopkg.in/xmlpath.v2"
 
+	"bytes"
 	"encoding/json"
 	"html"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
@@ -109,9 +111,11 @@ func crawlOne(title, url string, c_id int64) {
 
 	defer res.Body.Close()
 
-	node, _ := xmlpath.ParseHTML(res.Body)
+	str, _ := ioutil.ReadAll(res.Body)
 
-	SaveHtml(node.Bytes(), title)
+	SaveHtml(str, title)
+
+	node, _ := xmlpath.ParseHTML(bytes.NewReader(str))
 
 	// match js get data, get all tag p
 	contentsPath := xmlpath.MustCompile("//*[@id='js_content']/p")
