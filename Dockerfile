@@ -1,9 +1,10 @@
 FROM golang:alpine
 
-WORKDIR /go/src/app
+WORKDIR /go/src/github.com/gladmo/wechat
 COPY . .
 
-RUN go-wrapper download   # "go get -d -v ./..."
-RUN go-wrapper install    # "go install -v ./..."
+RUN apk add --no-cache git && \
+	go-wrapper install && \
+	apk del git
 
-CMD ["go-wrapper", "run"] # ["app"]
+CMD ["main"] # ["app"]
