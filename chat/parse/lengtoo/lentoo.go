@@ -33,6 +33,7 @@ func Spider() {
 	println("Get chat home url: " + chatUrl)
 
 	// Have Verification code
+	vsc.Log = nil
 	haveVerifyCode := vsc.HaveVerifyCode(chatUrl)
 	if haveVerifyCode {
 		ch := make(chan int, 1)
