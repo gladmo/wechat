@@ -8,6 +8,8 @@ wechat spider is a WeChat public number spider, you can write other rule to craw
 - [ ] TODO
 
 # Usage
+docker run --restart always -p 8910:8910 -d wernight/phantomjs phantomjs --webdriver=8910
+
 ```go
 	go get github.com/gladmo/wehat
 
