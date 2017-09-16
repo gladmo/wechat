@@ -3,8 +3,8 @@ FROM golang:alpine
 WORKDIR /go/src/github.com/gladmo/wechat
 COPY . .
 
-RUN apk add --no-cache git && \
-	go-wrapper install && \
-	apk del git
+RUN go-wrapper install && \
+	ln -s /go/src/github.com/gladmo/wechat/conf.yaml /go/bin/conf.yaml && \
+	ln -s /go/src/github.com/gladmo/wechat/public /go/bin/public
 
-CMD ["main"] # ["app"]
+CMD ["wechat", "spider", "lengtoo"]

@@ -12,9 +12,9 @@ func Connect() *gorm.DB {
 	pass := settings.Get("mysql.password")
 	host := settings.Get("mysql.host")
 	port := settings.Get("mysql.port")
-	table := settings.Get("mysql.table")
+	schema := settings.Get("mysql.schema")
 
-	dsn := username + ":" + pass + "@tcp(" + host + ":" + port + ")/" + table + "?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := username + ":" + pass + "@tcp(" + host + ":" + port + ")/" + schema + "?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open("mysql", dsn)
 	if err != nil {
 		panic(err)

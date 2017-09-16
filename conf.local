@@ -1,0 +1,9 @@
+mysql:
+  username: youmysqluser
+  password: youmysqlpass
+  host: youmysqlhost
+  port: 'youmysqlprot'
+  table: youmysqltable
+phantomjs:
+  # spider run in local, set you phantomjs remote url to remoteurl. spider run in docker, set phantomjs network to remoteurl
+  remoteurl: "http://127.0.0.1:8910"

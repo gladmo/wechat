@@ -1,6 +1,0 @@
-mysql:
-  username: youmysqluser
-  password: youmysqlpass
-  host: youmysqlhost
-  port: 'youmysqlprot'
-  table: youmysqltable

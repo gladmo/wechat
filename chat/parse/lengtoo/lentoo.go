@@ -6,6 +6,7 @@ import (
 	"github.com/gladmo/wechat/chat"
 	"github.com/gladmo/wechat/image"
 	"github.com/gladmo/wechat/models"
+	"github.com/gladmo/wechat/settings"
 	xmlpath "gopkg.in/xmlpath.v2"
 
 	"bytes"
@@ -34,6 +35,7 @@ func Spider() {
 
 	// Have Verification code
 	vsc.Log = nil
+	vsc.RemoteUrl = settings.Get("phantomjs.remoteurl")
 	haveVerifyCode := vsc.HaveVerifyCode(chatUrl)
 	if haveVerifyCode {
 		ch := make(chan int, 1)

@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"time"
 
-	"sourcegraph.com/sourcegraph/go-selenium"
+	"github.com/sourcegraph/go-selenium"
 )
 
 var (
