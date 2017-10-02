@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"runtime"
 	"time"
 
 	"github.com/sourcegraph/go-selenium"
@@ -113,9 +112,6 @@ type WebServer struct {
 }
 
 func (s *WebServer) webServer() {
-	// Get this file path, search tpls
-	_, filename, _, _ := runtime.Caller(1)
-
 	s.ch = make(chan int, 1)
 
 	server := &http.Server{Addr: "localhost:" + Port, Handler: s}
