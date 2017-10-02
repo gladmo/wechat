@@ -15,15 +15,15 @@ import (
 )
 
 var (
-	Port        string = "2222"
-	BrowserName string = "firefox"
-	RemoteUrl   string = "http://localhost:8910"
-	ImgId       string = "#verify_img"
-	ImgUrlSrc   string = "src"
-	Log                = log.New(os.Stderr, "[verifyCodeServer] ", log.Ltime|log.Lmicroseconds)
-	CurrPath    string
-	webDriver   selenium.WebDriver
-	elem        selenium.WebElement
+	Port         string = "2222"
+	BrowserName  string = "firefox"
+	RemoteUrl    string = "http://localhost:8910"
+	ImgId        string = "#verify_img"
+	ImgUrlSrc    string = "src"
+	Log                 = log.New(os.Stderr, "[verifyCodeServer] ", log.Ltime|log.Lmicroseconds)
+	templatePath string = "/public/tpls/verificationCode.html"
+	webDriver    selenium.WebDriver
+	elem         selenium.WebElement
 )
 
 func HaveVerifyCode(url string) bool {
@@ -116,7 +116,6 @@ type WebServer struct {
 func (s *WebServer) webServer() {
 	// Get this file path, search tpls
 	_, filename, _, _ := runtime.Caller(1)
-	CurrPath = filepath.Dir(filename)
 
 	s.ch = make(chan int, 1)
 
@@ -165,7 +164,7 @@ func (s *WebServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				"img": s.verifyCodeUrl,
 			}
 
-			t, _ := template.ParseFiles(CurrPath + "/public/tpls/verificationCode.html") //将一个文件读作模板
+			t, _ := template.ParseFiles(templatePath) //将一个文件读作模板
 			t.Execute(w, data)
 		}
 	case "POST":
