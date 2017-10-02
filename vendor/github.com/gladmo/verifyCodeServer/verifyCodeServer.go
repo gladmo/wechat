@@ -114,7 +114,7 @@ type WebServer struct {
 func (s *WebServer) webServer() {
 	s.ch = make(chan int, 1)
 
-	server := &http.Server{Addr: "localhost:" + Port, Handler: s}
+	server := &http.Server{Addr: "0.0.0.0:" + Port, Handler: s}
 
 	go func() {
 		if err := server.ListenAndServe(); err != nil {
