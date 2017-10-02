@@ -19,7 +19,7 @@ var (
 	ImgId        string = "#verify_img"
 	ImgUrlSrc    string = "src"
 	Log                 = log.New(os.Stderr, "[verifyCodeServer] ", log.Ltime|log.Lmicroseconds)
-	templatePath string = "/public/tpls/verificationCode.html"
+	templatePath string = "public/tpls/verificationCode.html"
 	webDriver    selenium.WebDriver
 	elem         selenium.WebElement
 )
